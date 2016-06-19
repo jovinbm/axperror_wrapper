@@ -1,5 +1,5 @@
 {
-  "name": "xjp_axperror",
+  "name": "axperror_wrapper",
   "version": "0.0.75",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jovinbm/axperror.git"
+    "url": "https://github.com/jovinbm/axperror_wrapper.git"
   },
   "author": "jovinbeda@hotmail.com",
   "license": "ISC",
