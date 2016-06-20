@@ -12,7 +12,7 @@ var ajv    = require("ajv")({
  */
 var Axperror_wrapper = function (config) {
   var self = this;
-
+  
   var schema = {
     type                : 'object',
     additionalProperties: false,
@@ -24,26 +24,32 @@ var Axperror_wrapper = function (config) {
       }
     }
   };
-
+  
   var valid = ajv.validate(schema, config);
-
+  
   if (!valid) {
     var e = new Error(ajv.errorsText());
     e.ajv = ajv.errors;
     throw e;
   }
-
+  
   if (typeof config.render_error_friendly !== 'function') {
     throw new Error('config.render_error_friendly should be function');
   }
-
+  
   self.name                  = 'Axperror_wrapper';
   self.render_error_friendly = config.render_error_friendly;
   self.stop_on_error         = !!config.stop_on_error;
-
+  
   if (self.stop_on_error) {
     console.log(colors.red.underline('Axperror_wrapper: Stopping on error'));
   }
+  
+  self.errorActionCompleted = function () {
+    if (self.stop_on_error) {
+      process.exit(1);
+    }
+  };
 };
 
 require('./lib/index')(Axperror_wrapper);
